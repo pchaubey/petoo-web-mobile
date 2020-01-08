@@ -37,15 +37,15 @@ export class MenuPage extends LitElement {
       }
 
       .categories-scroll-container {
-        overflow: scroll;
         height: 100%;
+        width: 100%;
       }
-
       
       .categories {
         background-color: #F3EEED;
         display: flex;
         flex-direction: row;
+        overflow: scroll;
       }
 
       .search {
@@ -53,8 +53,9 @@ export class MenuPage extends LitElement {
       }      
 
       .category {
+        white-space: nowrap;
         margin: 16px 16px 16px 0px;
-      }
+      }   
 
       .menu-items {
         margin: 16px;
@@ -153,8 +154,10 @@ export class MenuPage extends LitElement {
                   <div class='category'>Drinks</div>
                   <div class='category'>Vegetarian dishes</div>
                   <div class='category'>Non-vegetarian dishes</div>
-                  <div class='category'>Extras</div>
-                  <div class='category'>Popular</div>
+                  // <div class='category'>Extras</div>
+                  // <div class='category'>Popular</div>
+                  // <div class='category'>Popular</div>
+                  // <div class='category'>Popular</div>
                 </div>
               </div>
               <div class='menu-items'>
