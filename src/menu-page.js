@@ -37,7 +37,6 @@ export class MenuPage extends LitElement {
       }
 
       .categories-scroll-container {
-        height: 100%;
         width: 100%;
       }
       
@@ -57,9 +56,15 @@ export class MenuPage extends LitElement {
         margin: 16px 16px 16px 0px;
       }   
 
+      .menu-items-outer-wrapper {
+        display:block;
+        flex: auto;
+        overflow-y: scroll;
+      }
+
       .menu-items {
-        margin: 16px;
         display: flex;
+        margin: 16px; 
         flex-direction: column;
       }
 
@@ -154,20 +159,23 @@ export class MenuPage extends LitElement {
                   <div class='category'>Drinks</div>
                   <div class='category'>Vegetarian dishes</div>
                   <div class='category'>Non-vegetarian dishes</div>
-                  // <div class='category'>Extras</div>
-                  // <div class='category'>Popular</div>
-                  // <div class='category'>Popular</div>
-                  // <div class='category'>Popular</div>
+                  <!--
+                  <div class='category'>Extras</div>
+                  <div class='category'>Popular</div>
+                  <div class='category'>Popular</div>
+                  <div class='category'>Popular</div>
+                  -->
                 </div>
               </div>
+              <div class='menu-items-outer-wrapper'>
               <div class='menu-items'>
                 <div class='category-header-container'>
-                  <div class='category-header'>Drinks</div>
+                  <div class='category-header'><span id='drinks1'>Drinks</span></div>
                 </div>
                 <div class='menu-item-container'>
                   <div>
                     <span class='menu-item-name'>Heineken &#9432;</span>
-                    <div class='add-button'>+</div>
+                    <!--<div class='add-button'>+</div>-->
                   </div>
                   <span class='menu-item-description'>description goes here...</span>
                   <span class='menu-item-description2'>more description contiues...</span>
@@ -205,7 +213,7 @@ export class MenuPage extends LitElement {
                 </div>
 
                 <div class='category-header-container'>
-                  <div class='category-header'>Vegetarian dishes</div>
+                  <div class='category-header' id='vegetarian_dishes'>Vegetarian dishes</div>
                 </div>
                 <div class='menu-item-container'>
                   <div>
@@ -248,7 +256,7 @@ export class MenuPage extends LitElement {
                 </div>
 
                 <div class='category-header-container'>
-                  <div class='category-header'>Non-vegetarian dishes</div>
+                  <div class='category-header' id='non_vegetarian_dishes'>Non-vegetarian dishes</div>
                 </div>
                 <div class='menu-item-container'>
                   <div>
@@ -280,6 +288,7 @@ export class MenuPage extends LitElement {
                   <span class='menu-item-price'>€2,00</span>
                 </div>
 
+              </div>
               </div>
             </div>
            `;
