@@ -36,6 +36,7 @@ export class CheckoutPage extends LitElement {
         width: 100%;
         display: flex;
         flex-direction: row;
+        margin-bottom: 8px;
       }
 
       .item-count {
@@ -50,9 +51,16 @@ export class CheckoutPage extends LitElement {
         width: 48px;
       }
 
-      .sub-total,.other-charges,.total {
+      .sub-total,.other-charges {
         width: 100%;
         display: flex;
+        margin-bottom: 8px;
+      }
+
+      .total {
+        width: 100%;
+        display: flex;
+        margin: 8px 0px 8px 0px;
       }
       
       .price-on-right {
@@ -93,7 +101,7 @@ export class CheckoutPage extends LitElement {
                 <div><hr></div>
 
                 <div class='sub-total'>
-                  <div>Subtotal</div>
+                  <div class='flex-div'>Subtotal</div>
                   <div class='price-on-right'>12,00</div>
                 </div>
                 

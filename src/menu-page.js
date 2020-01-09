@@ -141,8 +141,10 @@ export class MenuPage extends LitElement {
       .basket.show {
         position: fixed;
         bottom: 0px;
-        width: 100%;
-        padding: 12px;
+        width: calc(100% - 16px);
+        height: 48px;
+        box-sizing: border-box;
+        margin: 8px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -153,9 +155,18 @@ export class MenuPage extends LitElement {
         display: none;
       }
 
-      .basket.show div {
+      .basket.show .total {
         font-size: 16px;
         color: white;
+      }
+
+      .basket.show .next-step {
+        float: right;
+        color: white;
+        width: 64px;
+        margin-top: -6px;
+        font-size: 32px;
+        font-weight: light;
       }
 
     `;
@@ -191,8 +202,16 @@ export class MenuPage extends LitElement {
       bubbles: true,
       detail: {total: this.total}
     });
-
     this.dispatchEvent(event);
+  }
+
+  formatCurrency(input) {
+    const formatter = new Intl.NumberFormat('nl-NL', {
+      style: 'currency',
+      currency: 'EUR',
+      minimumFractionDigits: 2
+    });
+    return formatter.format(input);
   }
 
   render() {
@@ -337,9 +356,10 @@ export class MenuPage extends LitElement {
               <!--</div>-->
 
               <div class="basket ${this.total > 0 ? 'show' : 'hide'}" @click=${this.emitCheckoutEvent}>
-                <div>
-                  Basket: € ${this.total}
+                <div class='total'>
+                  Basket: ${this.formatCurrency(this.total)}
                 </div>
+                <!--<div class='next-step'>&#8250;</div>-->
               </div>
 
             </div>

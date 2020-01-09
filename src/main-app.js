@@ -11,7 +11,6 @@ export class MainApp extends LitElement {
 
   static get styles() {
     return css`
-      div { color: red; }
       .main-container {
         display: block;
         height: 100%;
