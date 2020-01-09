@@ -5,6 +5,7 @@ import {
 } from 'lit-element';
 import WelcomePage from './welcome-page.js';
 import MenuPage from './menu-page.js';
+import checkout from './checkout-page.js'
 
 export class MainApp extends LitElement {
 
@@ -39,7 +40,8 @@ export class MainApp extends LitElement {
               <meta name="viewport" content="width=device-width, initial-scale=1">
               <div class='main-container'>
               ${this.page === 'welcome'?html`<welcome-page></welcome-page>`:html``}
-              ${this.page === 'menu'?html`<menu-page></menu-page>`:html``}
+              ${this.page === 'menu'?html`<menu-page @checkout=${() => this.page = 'checkout'}></menu-page>`:html``}
+              ${this.page === 'checkout'?html`<checkout-page></checkout-page>`:html``}
               </div>
            `;
   }

@@ -123,7 +123,7 @@ export class MenuPage extends LitElement {
       }
 
       .menu-item-price {
-        color: orangered; 
+        color: orangered;
         font-size: 16px;
         font-weight: bold;
         margin-left: 8px;
@@ -138,19 +138,62 @@ export class MenuPage extends LitElement {
         border: 1px solid #666666;
       }
 
+      .basket.show {
+        position: fixed;
+        bottom: 0px;
+        width: 100%;
+        padding: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #44464a;
+      }
+
+      .basket.hide {
+        display: none;
+      }
+
+      .basket.show div {
+        font-size: 16px;
+        color: white;
+      }
+
     `;
   }
 
   static get properties() {
     return { 
-      name: { type: String }
+      name: { type: String },
+      total: { type: Number}
     };
   }
 
   constructor() {
     super();
     this.name = 'menu';
+    this.total = 0;
   }  
+
+  scrollToCategory(id) {
+    //this.shadowRoot.getElementById(id).scrollIntoView();
+    window.scrollTo(0, (this.shadowRoot.getElementById(id).offsetTop - 64));
+    console.log(this.shadowRoot.getElementById(id).offsetTop);
+    console.log(this.shadowRoot.getElementById(id).offsetLeft);
+  };
+
+  addToBasket(amount) {
+    this.total += amount;
+  }
+
+  emitCheckoutEvent() {
+    const event = new CustomEvent('checkout', {
+      composed: true,
+      bubbles: true,
+      detail: {total: this.total}
+    });
+
+    this.dispatchEvent(event);
+  }
 
   render() {
     return html`
@@ -158,9 +201,9 @@ export class MenuPage extends LitElement {
               <div class='categories-scroll-container'>
                 <div class='categories font-regular'>
                   <div class='search'>&#128269;</div>
-                  <div class='category'>Drinks</div>
-                  <div class='category'>Vegetarian dishes</div>
-                  <div class='category'>Non-vegetarian dishes</div>
+                  <div class='category' @click=${() => this.scrollToCategory('drinks')}>Drinks</div>
+                  <div class='category' @click=${() => this.scrollToCategory('vegetarian_dishes')}>Vegetarian dishes</div>
+                  <div class='category' @click=${() => this.scrollToCategory('non_vegetarian_dishes')}>Non-vegetarian dishes</div>
                   <!--
                   <div class='category'>Extras</div>
                   <div class='category'>Popular</div>
@@ -171,13 +214,13 @@ export class MenuPage extends LitElement {
               </div>
               <!--<div class='menu-items-outer-wrapper'>-->
               <div class='menu-items'>
-                <div class='category-header-container'>
-                  <div class='category-header'><span id='drinks1'>Drinks</span></div>
+                <div class='category-header-container' id='drinks'>
+                  <div class='category-header'>Drinks</div>
                 </div>
                 <div class='menu-item-container'>
                   <div>
                     <span class='menu-item-name'>Heineken &#9432;</span>
-                    <!--<div class='add-button'>+</div>-->
+                    <div class='add-button' @click=${() => this.addToBasket(2)}>+</div>
                   </div>
                   <span class='menu-item-description'>description goes here...</span>
                   <span class='menu-item-description2'>more description contiues...</span>
@@ -187,7 +230,7 @@ export class MenuPage extends LitElement {
                 <div class='menu-item-container'>
                   <div>
                     <span class='menu-item-name'>Kobra &#9432;</span>
-                    <div class='add-button'>+</div>
+                    <div class='add-button' @click=${() => this.addToBasket(2)}>+</div>
                   </div>
                   <span class='menu-item-description'>description goes here...</span>
                   <span class='menu-item-description2'>more description contiues...</span>
@@ -197,7 +240,7 @@ export class MenuPage extends LitElement {
                 <div class='menu-item-container'>
                   <div>
                     <span class='menu-item-name'>Pilsener &#9432;</span>
-                    <div class='add-button'>+</div>
+                    <div class='add-button' @click=${() => this.addToBasket(2)}>+</div>
                   </div>
                   <span class='menu-item-description'>description goes here...</span>
                   <span class='menu-item-description2'>more description contiues...</span>
@@ -207,20 +250,20 @@ export class MenuPage extends LitElement {
                 <div class='menu-item-container'>
                   <div>
                     <span class='menu-item-name'>Affligem blond &#9432;</span>
-                    <div class='add-button'>+</div>
+                    <div class='add-button' @click=${() => this.addToBasket(2)}>+</div>
                   </div>
                   <span class='menu-item-description'>description goes here...</span>
                   <span class='menu-item-description2'>more description contiues...</span>
                   <span class='menu-item-price'>€2,00</span>
                 </div>
 
-                <div class='category-header-container'>
-                  <div class='category-header' id='vegetarian_dishes'>Vegetarian dishes</div>
+                <div class='category-header-container' id='vegetarian_dishes'>
+                  <div class='category-header'>Vegetarian dishes</div>
                 </div>
                 <div class='menu-item-container'>
                   <div>
                     <span class='menu-item-name'>Nachos</span>
-                    <div class='add-button'>+</div>
+                    <div class='add-button' @click=${() => this.addToBasket(2)}>+</div>
                   </div>
                   <span class='menu-item-description'>description goes here...</span>
                   <span class='menu-item-description2'>more description contiues...</span>
@@ -230,7 +273,7 @@ export class MenuPage extends LitElement {
                 <div class='menu-item-container'>
                   <div>
                     <span class='menu-item-name'>chips &#9432;</span>
-                    <div class='add-button'>+</div>
+                    <div class='add-button' @click=${() => this.addToBasket(2)}>+</div>
                   </div>
                   <span class='menu-item-description'>description goes here...</span>
                   <span class='menu-item-description2'>more description contiues...</span>
@@ -240,7 +283,7 @@ export class MenuPage extends LitElement {
                 <div class='menu-item-container'>
                   <div>
                     <span class='menu-item-name'>Fries</span>
-                    <div class='add-button'>+</div>
+                    <div class='add-button' @click=${() => this.addToBasket(2)}>+</div>
                   </div>
                   <span class='menu-item-description'>description goes here...</span>
                   <span class='menu-item-description2'>more description contiues...</span>
@@ -250,20 +293,20 @@ export class MenuPage extends LitElement {
                 <div class='menu-item-container'>
                   <div>
                     <span class='menu-item-name'>Salad &#9432;</span>
-                    <div class='add-button'>+</div>
+                    <div class='add-button' @click=${() => this.addToBasket(2)}>+</div>
                   </div>
                   <span class='menu-item-description'>description goes here...</span>
                   <span class='menu-item-description2'>more description contiues...</span>
                   <span class='menu-item-price'>€2,00</span>
                 </div>
 
-                <div class='category-header-container'>
-                  <div class='category-header' id='non_vegetarian_dishes'>Non-vegetarian dishes</div>
+                <div class='category-header-container' id='non_vegetarian_dishes'>
+                  <div class='category-header'>Non-vegetarian dishes</div>
                 </div>
                 <div class='menu-item-container'>
                   <div>
                     <span class='menu-item-name'>Bitter balls &#9432;</span>
-                    <div class='add-button'>+</div>
+                    <div class='add-button' @click=${() => this.addToBasket(2)}>+</div>
                   </div>
                   <span class='menu-item-description'>description goes here...</span>
                   <span class='menu-item-description2'>more description contiues...</span>
@@ -273,7 +316,7 @@ export class MenuPage extends LitElement {
                 <div class='menu-item-container'>
                   <div>
                     <span class='menu-item-name'>Chicken wings &#9432;</span>
-                    <div class='add-button'>+</div>
+                    <div class='add-button' @click=${() => this.addToBasket(2)}>+</div>
                   </div>
                   <span class='menu-item-description'>description goes here...</span>
                   <span class='menu-item-description2'>more description contiues...</span>
@@ -283,7 +326,7 @@ export class MenuPage extends LitElement {
                 <div class='menu-item-container'>
                   <div>
                     <span class='menu-item-name'>Chicken lollypops &#9432;</span>
-                    <div class='add-button'>+</div>
+                    <div class='add-button' @click=${() => this.addToBasket(2)}>+</div>
                   </div>
                   <span class='menu-item-description'>description goes here...</span>
                   <span class='menu-item-description2'>more description contiues...</span>
@@ -292,6 +335,13 @@ export class MenuPage extends LitElement {
 
               </div>
               <!--</div>-->
+
+              <div class="basket ${this.total > 0 ? 'show' : 'hide'}" @click=${this.emitCheckoutEvent}>
+                <div>
+                  Basket: € ${this.total}
+                </div>
+              </div>
+
             </div>
            `;
   }
