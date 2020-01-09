@@ -32,12 +32,12 @@ export class MenuPage extends LitElement {
       .container {
         height: 100%;
         width: 100%;
-        display: flex;
-        flex-direction: column;
       }
 
       .categories-scroll-container {
         width: 100%;
+        position: fixed;
+        top: 0px
       }
       
       .categories {
@@ -55,16 +55,18 @@ export class MenuPage extends LitElement {
         white-space: nowrap;
         margin: 16px 16px 16px 0px;
       }   
-
+/*
       .menu-items-outer-wrapper {
         display:block;
         flex: auto;
         overflow-y: scroll;
       }
-
+*/
       .menu-items {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 64px 16px 16px 16px; 
         display: flex;
-        margin: 16px; 
         flex-direction: column;
       }
 
@@ -76,7 +78,7 @@ export class MenuPage extends LitElement {
         align-items: start;
         justify-content: center;
         margin-bottom: 8px;
-      }      
+      }
 
       .category-header {
         font-size: 16px;
@@ -84,7 +86,7 @@ export class MenuPage extends LitElement {
         font-family: Open Sans,Helvetica,sans-serif;
         color: #0a3848;
         margin: auto 16px auto 16px;
-      }      
+      }
 
       .menu-item-container {
         font-size: 14px;
@@ -167,7 +169,7 @@ export class MenuPage extends LitElement {
                   -->
                 </div>
               </div>
-              <div class='menu-items-outer-wrapper'>
+              <!--<div class='menu-items-outer-wrapper'>-->
               <div class='menu-items'>
                 <div class='category-header-container'>
                   <div class='category-header'><span id='drinks1'>Drinks</span></div>
@@ -289,7 +291,7 @@ export class MenuPage extends LitElement {
                 </div>
 
               </div>
-              </div>
+              <!--</div>-->
             </div>
            `;
   }

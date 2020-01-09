@@ -196,12 +196,12 @@ const B=(t,e)=>`${t}--${e}`;let $=!0;void 0===window.ShadyCSS?$=!1:void 0===wind
       .container {
         height: 100%;
         width: 100%;
-        display: flex;
-        flex-direction: column;
       }
 
       .categories-scroll-container {
         width: 100%;
+        position: fixed;
+        top: 0px
       }
       
       .categories {
@@ -219,16 +219,18 @@ const B=(t,e)=>`${t}--${e}`;let $=!0;void 0===window.ShadyCSS?$=!1:void 0===wind
         white-space: nowrap;
         margin: 16px 16px 16px 0px;
       }   
-
+/*
       .menu-items-outer-wrapper {
         display:block;
         flex: auto;
         overflow-y: scroll;
       }
-
+*/
       .menu-items {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 64px 16px 16px 16px; 
         display: flex;
-        margin: 16px; 
         flex-direction: column;
       }
 
@@ -240,7 +242,7 @@ const B=(t,e)=>`${t}--${e}`;let $=!0;void 0===window.ShadyCSS?$=!1:void 0===wind
         align-items: start;
         justify-content: center;
         margin-bottom: 8px;
-      }      
+      }
 
       .category-header {
         font-size: 16px;
@@ -248,7 +250,7 @@ const B=(t,e)=>`${t}--${e}`;let $=!0;void 0===window.ShadyCSS?$=!1:void 0===wind
         font-family: Open Sans,Helvetica,sans-serif;
         color: #0a3848;
         margin: auto 16px auto 16px;
-      }      
+      }
 
       .menu-item-container {
         font-size: 14px;
@@ -316,7 +318,7 @@ const B=(t,e)=>`${t}--${e}`;let $=!0;void 0===window.ShadyCSS?$=!1:void 0===wind
                   -->
                 </div>
               </div>
-              <div class='menu-items-outer-wrapper'>
+              <!--<div class='menu-items-outer-wrapper'>-->
               <div class='menu-items'>
                 <div class='category-header-container'>
                   <div class='category-header'><span id='drinks1'>Drinks</span></div>
@@ -438,7 +440,7 @@ const B=(t,e)=>`${t}--${e}`;let $=!0;void 0===window.ShadyCSS?$=!1:void 0===wind
                 </div>
 
               </div>
-              </div>
+              <!--</div>-->
             </div>
            `}});customElements.define("main-app",class extends ct{static get styles(){return at`
       div { color: red; }
