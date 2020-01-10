@@ -27,10 +27,25 @@ export class CheckoutPage extends LitElement {
         height: 100%;
         width: 100%;
         box-sizing: border-box;
-        padding: 48px 16px 16px 16px;
+        padding: 16px 16px 16px 16px;
         display: flex;
         flex-direction: column;
-      }   
+      }
+
+      .header {
+        width: 100%;
+        height: 48px;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #F3EEED;
+      }
+
+      .summary-container {
+        flex: auto;
+        width: 100%;
+      }
       
       .line-items {
         width: 100%;
@@ -49,6 +64,7 @@ export class CheckoutPage extends LitElement {
     
       .item-price {
         width: 48px;
+        text-align: right;
       }
 
       .sub-total,.other-charges {
@@ -65,12 +81,46 @@ export class CheckoutPage extends LitElement {
       
       .price-on-right {
         width: 48px;
+        text-align: right;
       }
 
       .flex-div {
         flex: auto;
       }
       
+      .pay-button-apple {
+        position: fixed;
+        bottom: 0px;
+        left: 0px;
+        width: calc(100% - 32px);
+        height: 48px;
+        margin: 8px 16px 8px 16px;
+        border-radius: 4px;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #44464a;
+      }
+
+      .pay-button-google {
+        position: fixed;
+        bottom: 56px;
+        left: 0px;
+        width: calc(100% - 32px);
+        height: 48px;
+        margin: 8px 16px 8px 16px;
+        border-radius: 4px;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #44464a;
+      }
+
+      .font-white {
+        color: white;
+      }
     `;
   }
 
@@ -86,34 +136,52 @@ export class CheckoutPage extends LitElement {
   render() {
     return html`
               <div class='container'>
-                <div class='line-items'>
-                  <div class='item-count'>2</div>
-                  <div class='item-name'>Hieneken</div>
-                  <div class='item-price'>4,00</div>
+
+                <div class='header'>
+                  <div>Basket</div>
                 </div>
 
-                <div class='line-items'>
-                  <div class='item-count'>1</div>
-                  <div class='item-name'>Bitter balls</div>
-                  <div class='item-price'>8,00</div>
+                <div class='summary-container'>
+
+                  <div class='line-items'>
+                    <div class='item-count'>2</div>
+                    <div class='item-name'>Hieneken</div>
+                    <div class='item-price'>4,00</div>
+                  </div>
+
+                  <div class='line-items'>
+                    <div class='item-count'>1</div>
+                    <div class='item-name'>Bitter balls</div>
+                    <div class='item-price'>8,00</div>
+                  </div>
+
+                  <div><hr></div>
+
+                  <div class='sub-total'>
+                    <div class='flex-div'>Subtotal</div>
+                    <div class='price-on-right'>12,00</div>
+                  </div>
+                  
+                  <div class='other-charges'>
+                    <div class='flex-div'>Other charges</div>
+                    <div class='price-on-right'>0,00</div>
+                  </div>
+
+                  <div class='total'>
+                    <div class='font-bold flex-div'>Total</div>
+                    <div class='font-bold price-on-right'>12,00</div>
+                  </div>
+
                 </div>
 
-                <div><hr></div>
-
-                <div class='sub-total'>
-                  <div class='flex-div'>Subtotal</div>
-                  <div class='price-on-right'>12,00</div>
+                <div class='pay-button-apple'>
+                  <div class='font-bold font-white'>Apple checkout</div>
                 </div>
-                
-                <div class='other-charges'>
-                  <div class='flex-div'>Other charges</div>
-                  <div class='price-on-right'>0,00</div>
-                </div> 
 
-                <div class='total'>
-                  <div class='font-bold flex-div'>Total</div>
-                  <div class='font-bold price-on-right'>12,00</div>
+                <div class='pay-button-google'>
+                  <div class='font-bold font-white'>Google Pay</div>
                 </div>                 
+
               </div>
            `;
   }

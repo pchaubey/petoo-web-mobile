@@ -141,10 +141,11 @@ export class MenuPage extends LitElement {
       .basket.show {
         position: fixed;
         bottom: 0px;
-        width: calc(100% - 16px);
+        width: calc(100% - 32px);
         height: 48px;
         box-sizing: border-box;
-        margin: 8px;
+        border-radius: 4px;
+        margin: 8px 16px 8px 16px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -156,17 +157,19 @@ export class MenuPage extends LitElement {
       }
 
       .basket.show .total {
-        font-size: 16px;
+        flex: auto;
         color: white;
+        font-size: 16px;
+        text-align: center;
       }
 
       .basket.show .next-step {
-        float: right;
-        color: white;
-        width: 64px;
+        width: 32px;
         margin-top: -6px;
+        color: white;
         font-size: 32px;
         font-weight: light;
+        text-align: left;
       }
 
     `;
@@ -359,7 +362,7 @@ export class MenuPage extends LitElement {
                 <div class='total'>
                   Basket: ${this.formatCurrency(this.total)}
                 </div>
-                <!--<div class='next-step'>&#8250;</div>-->
+                <div class='next-step'>&#8250;</div>
               </div>
 
             </div>
