@@ -180,19 +180,28 @@ export class MenuPage extends LitElement {
       name: { type: String },
       basket: {type: Object},
       total: { type: Number},
-      menu: {type: Object}
+      menu: {type: Object},
+      cachedmenu: {type: Object},
+      initialized: { type: Boolean },
     };
   }
 
   constructor() {
     super();
     this.name = 'menu';
-    this.total = 0; 
-    this.basket = {
-      total: 0,
-      items: []
-    };
-    this.fetchMenu();
+    this.total = 0;
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.total = this.basket.total;
+    if (!this.cachedmenu.menu) {
+      this.fetchMenu();
+      this.cachedmenu.menu = this.menu;
+    } else {
+      this.menu = this.cachedmenu.menu;
+    }
+    this.initialized = true;
   }  
 
   scrollToCategory(id) {
@@ -233,13 +242,17 @@ export class MenuPage extends LitElement {
   }
 
   render() {
+    return this.initialized ? html`${this.renderPage()}`: html``;
+  }
+
+  renderPage() {
     return html`
-            <div class='container'>
-              ${this.renderCategoriesTopBar()}
-              ${this.renderCategories()}
-              ${this.renderBasket()}
-            </div>
-           `;
+      <div class='container'>
+        ${this.renderCategoriesTopBar()}
+        ${this.renderCategories()}
+        ${this.renderBasket()}
+      </div>
+      `;
   }
 
   renderCategoriesTopBar() {
@@ -308,7 +321,6 @@ export class MenuPage extends LitElement {
   }
 
   fetchMenu() {
-    console.log('fetching menu..');
     const menu = 
       [
         {

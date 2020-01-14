@@ -23,7 +23,8 @@ export class MainApp extends LitElement {
   static get properties() {
     return { 
       page: { type: String },
-      basket: {type: Object}
+      basket: {type: Object},
+      cachedmenu: {type: Object},
     };
   }
 
@@ -38,6 +39,7 @@ export class MainApp extends LitElement {
       total: 0,
       items: []
     };
+    this.cachedmenu = {};
   }
 
   render() {
@@ -45,7 +47,7 @@ export class MainApp extends LitElement {
               <meta name="viewport" content="width=device-width, initial-scale=1">
               <div class='main-container'>
               ${this.page === 'welcome'?html`<welcome-page></welcome-page>`:html``}
-              ${this.page === 'menu'?html`<menu-page @changepage=${this.changePage} .basket="${this.basket}"></menu-page>`:html``}
+              ${this.page === 'menu'?html`<menu-page @changepage=${this.changePage} .cachedmenu="${this.cachedmenu}" .basket="${this.basket}"></menu-page>`:html``}
               ${this.page === 'basket'?html`<basket-page @changepage=${this.changePage} .basket="${this.basket}"></basket-page>`:html``}
               </div>
            `;
