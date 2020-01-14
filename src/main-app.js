@@ -22,7 +22,8 @@ export class MainApp extends LitElement {
 
   static get properties() {
     return { 
-      page: { type: String }
+      page: { type: String },
+      basket: {type: Object}
     };
   }
 
@@ -32,17 +33,27 @@ export class MainApp extends LitElement {
     setTimeout(() => {
         this.page = 'menu';
     }, 2000);
-  }  
+
+    this.basket = {
+      total: 0,
+      items: []
+    };
+  }
 
   render() {
     return html`
               <meta name="viewport" content="width=device-width, initial-scale=1">
               <div class='main-container'>
               ${this.page === 'welcome'?html`<welcome-page></welcome-page>`:html``}
-              ${this.page === 'menu'?html`<menu-page @checkout=${() => this.page = 'checkout'}></menu-page>`:html``}
-              ${this.page === 'checkout'?html`<checkout-page></checkout-page>`:html``}
+              ${this.page === 'menu'?html`<menu-page @checkout=${this.checkout}></menu-page>`:html``}
+              ${this.page === 'checkout'?html`<checkout-page .basket="${this.basket}"></checkout-page>`:html``}
               </div>
            `;
+  }
+
+  checkout(event) {
+    this.basket = event.detail.basket;
+    this.page = 'checkout';
   }
 }
 

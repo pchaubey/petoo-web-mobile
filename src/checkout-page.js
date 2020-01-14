@@ -126,12 +126,22 @@ export class CheckoutPage extends LitElement {
 
   static get properties() {
     return { 
+      basket: {type: Object}
     };
   }
 
   constructor() {
     super();
-  }  
+  }
+
+  formatCurrency(input) {
+    const formatter = new Intl.NumberFormat('nl-NL', {
+      style: 'currency',
+      currency: 'EUR',
+      minimumFractionDigits: 2
+    });
+    return formatter.format(input);
+  }
 
   render() {
     return html`
@@ -159,7 +169,7 @@ export class CheckoutPage extends LitElement {
 
                   <div class='sub-total'>
                     <div class='flex-div'>Subtotal</div>
-                    <div class='price-on-right'>12,00</div>
+                    <div class='price-on-right'>${this.formatCurrency(this.basket.total)}</div>
                   </div>
                   
                   <div class='other-charges'>
@@ -169,7 +179,7 @@ export class CheckoutPage extends LitElement {
 
                   <div class='total'>
                     <div class='font-bold flex-div'>Total</div>
-                    <div class='font-bold price-on-right'>12,00</div>
+                    <div class='font-bold price-on-right'>${this.formatCurrency(this.basket.total)}</div>
                   </div>
 
                 </div>
