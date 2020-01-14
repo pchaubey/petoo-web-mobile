@@ -5,7 +5,7 @@ import {
 } from 'lit-element';
 import WelcomePage from './welcome-page.js';
 import MenuPage from './menu-page.js';
-import checkout from './checkout-page.js'
+import BasketPage from './basket-page.js'
 
 export class MainApp extends LitElement {
 
@@ -45,15 +45,19 @@ export class MainApp extends LitElement {
               <meta name="viewport" content="width=device-width, initial-scale=1">
               <div class='main-container'>
               ${this.page === 'welcome'?html`<welcome-page></welcome-page>`:html``}
-              ${this.page === 'menu'?html`<menu-page @checkout=${this.checkout}></menu-page>`:html``}
-              ${this.page === 'checkout'?html`<checkout-page .basket="${this.basket}"></checkout-page>`:html``}
+              ${this.page === 'menu'?html`<menu-page @changepage=${this.changePage} .basket="${this.basket}"></menu-page>`:html``}
+              ${this.page === 'basket'?html`<basket-page @changepage=${this.changePage} .basket="${this.basket}"></basket-page>`:html``}
               </div>
            `;
   }
 
-  checkout(event) {
-    this.basket = event.detail.basket;
-    this.page = 'checkout';
+  changePage(event) {
+    if (event.detail.page === 'menu') {
+      this.page = 'menu';
+    } else if (event.detail.page === 'basket') {
+      this.page = 'basket';
+      //this.basket = event.detail.basket;
+    }
   }
 }
 

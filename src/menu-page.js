@@ -178,13 +178,7 @@ export class MenuPage extends LitElement {
   static get properties() {
     return { 
       name: { type: String },
-      basket: { 
-        type: Object, 
-        value: {
-          total: 0,
-          items: []
-        }
-      },
+      basket: {type: Object},
       total: { type: Number},
       menu: {type: Object}
     };
@@ -220,11 +214,11 @@ export class MenuPage extends LitElement {
     }
   }
 
-  emitCheckoutEvent() {
-    const event = new CustomEvent('checkout', {
+  goToBasket() {
+    const event = new CustomEvent('changepage', {
       composed: true,
       bubbles: true,
-      detail: {basket: this.basket}
+      detail: {page: 'basket', basket: this.basket}
     });
     this.dispatchEvent(event);
   }
@@ -304,7 +298,7 @@ export class MenuPage extends LitElement {
 
   renderBasket() {
     return html`
-      <div class="basket ${this.total > 0 ? 'show' : 'hide'}" @click=${this.emitCheckoutEvent}>
+      <div class="basket ${this.total > 0 ? 'show' : 'hide'}" @click=${this.goToBasket}>
         <div class='total'>
           Basket: ${this.formatCurrency(this.basket.total)}
         </div>
@@ -314,6 +308,7 @@ export class MenuPage extends LitElement {
   }
 
   fetchMenu() {
+    console.log('fetching menu..');
     const menu = 
       [
         {

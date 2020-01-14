@@ -5,7 +5,7 @@ import {
 } from 'lit-element';
 import './style.css'
 
-export class CheckoutPage extends LitElement {
+export class BasketPage extends LitElement {
 
   static get styles() {
     return css`
@@ -40,6 +40,13 @@ export class CheckoutPage extends LitElement {
         align-items: center;
         justify-content: center;
         background-color: #F3EEED;
+      }
+
+      .cross {
+        position: absolute;
+        top: 24px;
+        right: 24px;
+        float: right;
       }
 
       .summary-container {
@@ -146,24 +153,14 @@ export class CheckoutPage extends LitElement {
   render() {
     return html`
               <div class='container'>
-
+                <div class='cross' @click=${this.backToMenu}>X</div>
                 <div class='header'>
                   <div>Basket</div>
                 </div>
 
                 <div class='summary-container'>
 
-                  <div class='line-items'>
-                    <div class='item-count'>2</div>
-                    <div class='item-name'>Hieneken</div>
-                    <div class='item-price'>4,00</div>
-                  </div>
-
-                  <div class='line-items'>
-                    <div class='item-count'>1</div>
-                    <div class='item-name'>Bitter balls</div>
-                    <div class='item-price'>8,00</div>
-                  </div>
+                  ${this.renderLineItems()}
 
                   <div><hr></div>
 
@@ -174,7 +171,7 @@ export class CheckoutPage extends LitElement {
                   
                   <div class='other-charges'>
                     <div class='flex-div'>Other charges</div>
-                    <div class='price-on-right'>0,00</div>
+                    <div class='price-on-right'>${this.formatCurrency(0)}</div>
                   </div>
 
                   <div class='total'>
@@ -195,6 +192,31 @@ export class CheckoutPage extends LitElement {
               </div>
            `;
   }
+
+  renderLineItems() {
+    return html`
+      ${this.basket.items.map((item) => this.renderLineItem(item))}
+    `;
+  }
+
+  renderLineItem(lineItem) {
+    return html`
+      <div class='line-items'>
+        <div class='item-count'>${lineItem.count}</div>
+        <div class='item-name'>${lineItem.name}</div>
+        <div class='item-price'>${this.formatCurrency(lineItem.price * lineItem.count)}</div>
+      </div>
+    `;
+  }
+
+  backToMenu() {
+    const event = new CustomEvent('changepage', {
+      composed: true,
+      bubbles: true,
+      detail: {page: 'menu', basket: this.basket}
+    });
+    this.dispatchEvent(event);
+  }
 }
 
-customElements.define('checkout-page', CheckoutPage)
+customElements.define('basket-page', BasketPage)
